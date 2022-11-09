@@ -30,7 +30,6 @@
 #include <pthread.h>
 #include <unistd.h>
 #endif
-#endif
 // clang-format on
 
 namespace rtc {
