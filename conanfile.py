@@ -19,7 +19,7 @@ class RtcbaseConan(ConanFile):
             del self.options.fPIC
 
     def source(self):
-        self.run("git clone https://github.com/zhangjinpeng66/rtcbase.git")
+        self.run("git clone git@github.com:zhangjinpeng66/rtcbase.git")
         # This small hack might be useful to guarantee proper /MT /MD linkage
         # in MSVC if the packaged project doesn't have variables to set it
         # properly
