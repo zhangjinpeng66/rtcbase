@@ -25,8 +25,10 @@
 #elif defined(WEBRTC_POSIX)
 #include <pthread.h>
 #include <unistd.h>
-#if defined(WEBRTC_MAC)
+#elif defined(WEBRTC_MAC)
 #include <pthread_spis.h>
+#include <pthread.h>
+#include <unistd.h>
 #endif
 #endif
 // clang-format on
@@ -39,6 +41,9 @@ typedef DWORD PlatformThreadRef;
 typedef zx_handle_t PlatformThreadId;
 typedef zx_handle_t PlatformThreadRef;
 #elif defined(WEBRTC_POSIX)
+typedef pid_t PlatformThreadId;
+typedef pthread_t PlatformThreadRef;
+#elif defined(WEBRTC_MAC)
 typedef pid_t PlatformThreadId;
 typedef pthread_t PlatformThreadRef;
 #endif
