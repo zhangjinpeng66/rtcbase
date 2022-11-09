@@ -82,7 +82,7 @@
 # include <machine/endian.h>
 #else
 #if defined(linux) || defined(__linux__)
-# include <endian.h>
+# include <absl/base/internal/endian.h>
 #else
 #define	LITTLE_ENDIAN	1234	/* least-significant byte first (vax, pc) */
 #define	BIG_ENDIAN	4321	/* most-significant byte first (IBM, net) */
