@@ -20,12 +20,12 @@
 #include <mmsystem.h>
 
 
-#elif defined(WEBRTC_POSIX)
+#elif defined(WEBRTC_POSIX) || defined(WEBRTC_MAC)
 
 #include <sys/time.h>
 #include <time.h>
 
-#endif  // defined(WEBRTC_POSIX)
+#endif  // defined(WEBRTC_POSIX) || defined(WEBRTC_MAC)
 
 #include "rtc_base/synchronization/mutex.h"
 #include "rtc_base/time_utils.h"
@@ -238,7 +238,7 @@ class WindowsRealTimeClock : public RealTimeClock {
   const ReferencePoint ref_point_;
 };
 
-#elif defined(WEBRTC_POSIX)
+#elif defined(WEBRTC_POSIX) || defined(WEBRTC_MAC)
 class UnixRealTimeClock : public RealTimeClock {
  public:
   UnixRealTimeClock() {}
@@ -255,14 +255,14 @@ class UnixRealTimeClock : public RealTimeClock {
     return tv;
   }
 };
-#endif  // defined(WEBRTC_POSIX)
+#endif  // defined(WEBRTC_POSIX) || defined(WEBRTC_MAC)
 
 Clock* Clock::GetRealTimeClock() {
 #if defined(WINUWP)
   static Clock* const clock = new WinUwpRealTimeClock();
 #elif defined(WEBRTC_WIN)
   static Clock* const clock = new WindowsRealTimeClock();
-#elif defined(WEBRTC_POSIX)
+#elif defined(WEBRTC_POSIX) || defined(WEBRTC_MAC)
   static Clock* const clock = new UnixRealTimeClock();
 #else
   static Clock* const clock = nullptr;

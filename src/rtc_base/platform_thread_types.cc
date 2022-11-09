@@ -53,7 +53,7 @@ PlatformThreadRef CurrentThreadRef() {
   return GetCurrentThreadId();
 #elif defined(WEBRTC_FUCHSIA)
   return zx_thread_self();
-#elif defined(WEBRTC_POSIX)
+#elif defined(WEBRTC_POSIX) || defined(WEBRTC_MAC)
   return pthread_self();
 #endif
 }
@@ -61,7 +61,7 @@ PlatformThreadRef CurrentThreadRef() {
 bool IsThreadRefEqual(const PlatformThreadRef& a, const PlatformThreadRef& b) {
 #if defined(WEBRTC_WIN) || defined(WEBRTC_FUCHSIA)
   return a == b;
-#elif defined(WEBRTC_POSIX)
+#elif defined(WEBRTC_POSIX) || defined(WEBRTC_MAC)
   return pthread_equal(a, b);
 #endif
 }

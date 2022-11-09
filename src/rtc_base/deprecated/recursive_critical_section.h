@@ -14,6 +14,7 @@
 #include "rtc_base/constructor_magic.h"
 #include "rtc_base/platform_thread_types.h"
 #include "rtc_base/thread_annotations.h"
+#include "rtc_base/synchronization/mutex_pthread.h"
 
 #if defined(WEBRTC_WIN)
 // clang-format off
@@ -28,7 +29,7 @@
 // clang-format on
 #endif  // defined(WEBRTC_WIN)
 
-#if defined(WEBRTC_POSIX)
+#if defined(WEBRTC_POSIX) || defined(WEBRTC_MAC)
 #include <pthread.h>
 #endif
 
@@ -64,7 +65,7 @@ class RTC_LOCKABLE RecursiveCriticalSection {
 
 #if defined(WEBRTC_WIN)
   mutable CRITICAL_SECTION crit_;
-#elif defined(WEBRTC_POSIX)
+#elif defined(WEBRTC_POSIX) || defined(WEBRTC_MAC)
 #if defined(WEBRTC_MAC) && !RTC_USE_NATIVE_MUTEX_ON_MAC
   // Number of times the lock has been locked + number of threads waiting.
   // TODO(tommi): We could use this number and subtract the recursion count
@@ -82,7 +83,7 @@ class RTC_LOCKABLE RecursiveCriticalSection {
 #endif
   mutable PlatformThreadRef thread_;  // Only used by RTC_DCHECKs.
   mutable int recursion_count_;       // Only used by RTC_DCHECKs.
-#else  // !defined(WEBRTC_WIN) && !defined(WEBRTC_POSIX)
+#else
 #error Unsupported platform.
 #endif
 };

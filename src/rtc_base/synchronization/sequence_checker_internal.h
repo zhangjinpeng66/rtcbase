@@ -67,7 +67,7 @@ class SequenceCheckerDoNothing {
 class RTC_SCOPED_LOCKABLE SequenceCheckerScope {
  public:
   template <typename ThreadLikeObject>
-  explicit SequenceCheckerScope(const ThreadLikeObject* /*thread_like_object*/)
+  explicit SequenceCheckerScope(const ThreadLikeObject* thread_like_object)
       RTC_EXCLUSIVE_LOCK_FUNCTION(thread_like_object) {}
   SequenceCheckerScope(const SequenceCheckerScope&) = delete;
   SequenceCheckerScope& operator=(const SequenceCheckerScope&) = delete;

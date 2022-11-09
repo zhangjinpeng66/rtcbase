@@ -22,9 +22,10 @@
 #include <type_traits>
 #include <vector>
 
-#if defined(WEBRTC_POSIX)
+#if defined(WEBRTC_POSIX) || defined(WEBRTC_MAC)
 #include <pthread.h>
 #endif
+#include "api/task_queue/task_queue_base.h"
 #include "api/function_view.h"
 #include "api/task_queue/queued_task.h"
 #include "api/task_queue/task_queue_base.h"
@@ -176,7 +177,7 @@ class RTC_EXPORT ThreadManager {
   std::map<Thread*, std::set<Thread*>> send_graph_ RTC_GUARDED_BY(crit_);
 #endif
 
-#if defined(WEBRTC_POSIX)
+#if defined(WEBRTC_POSIX) || defined(WEBRTC_MAC)
   pthread_key_t key_;
 #endif
 
@@ -660,7 +661,7 @@ class RTC_LOCKABLE RTC_EXPORT Thread : public webrtc::TaskQueueBase {
   // TODO(tommi): Add thread checks for proper use of control methods.
   // Ideally we should be able to just use PlatformThread.
 
-#if defined(WEBRTC_POSIX)
+#if defined(WEBRTC_POSIX) || defined(WEBRTC_MAC)
   pthread_t thread_ = 0;
 #endif
 

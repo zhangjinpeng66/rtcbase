@@ -24,6 +24,8 @@
 #include "rtc_base/synchronization/mutex_critical_section.h"
 #elif defined(WEBRTC_POSIX)
 #include "rtc_base/synchronization/mutex_pthread.h"
+#elif defined(WEBRTC_MAC)
+#include "rtc_base/synchronization/mutex_pthread.h"
 #else
 #error Unsupported platform.
 #endif

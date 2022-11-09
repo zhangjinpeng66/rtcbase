@@ -19,7 +19,7 @@
 
 #include "rtc_base/system/arch.h"
 
-#if defined(WEBRTC_MAC)
+#if defined(WEBRTC_POSIX)
 #include <libkern/OSByteOrder.h>
 
 #define htobe16(v) OSSwapHostToBigInt16(v)

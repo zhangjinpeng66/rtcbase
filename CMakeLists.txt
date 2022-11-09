@@ -11,7 +11,7 @@ link_directories(
     "${PROJECT_SOURCE_DIR}/third_party/lib"
 )
 
-add_definitions("-g -pipe -W -Wall -fPIC -std=gnu++14 -DWEBRTC_MAC
+add_definitions("-g -pipe -W -Wall -fPIC -std=gnu++14 -DWEBRTC_POSIX
     -DWEBRTC_MAC -DNDEBUG -Wno-unused-parameter")
 
 file(GLOB all_src

@@ -11,7 +11,7 @@
 #ifndef RTC_BASE_SYNCHRONIZATION_MUTEX_PTHREAD_H_
 #define RTC_BASE_SYNCHRONIZATION_MUTEX_PTHREAD_H_
 
-#if defined(WEBRTC_POSIX)
+#if defined(WEBRTC_POSIX) || defined(WEBRTC_MAC)
 
 #include <pthread.h>
 #if defined(WEBRTC_MAC)
@@ -29,7 +29,7 @@ class RTC_LOCKABLE MutexImpl final {
   MutexImpl() {
     pthread_mutexattr_t mutex_attribute;
     pthread_mutexattr_init(&mutex_attribute);
-#if defined(WEBRTC_MAC)
+#if defined(WEBRTC_MAC) || defined(WEBRTC_POSIX)
     pthread_mutexattr_setpolicy_np(&mutex_attribute,
                                    _PTHREAD_MUTEX_POLICY_FIRSTFIT);
 #endif
@@ -97,5 +97,5 @@ class RTC_LOCKABLE MutexImpl final {
 };
 
 }  // namespace webrtc
-#endif  // #if defined(WEBRTC_POSIX)
+#endif  // #if defined(WEBRTC_POSIX) || defined(WEBRTC_MAC)
 #endif  // RTC_BASE_SYNCHRONIZATION_MUTEX_PTHREAD_H_
